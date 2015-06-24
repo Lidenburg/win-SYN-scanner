@@ -188,7 +188,7 @@ int main(int argc, char *argv[]){
 
 	// Check ports from port_start to port_end
 
-	for(port = port_start; port < port_end; port++){
+	for(port = abs(port_start -1); port < abs(port_end +2); port++){
 		if(!SetThreadPriority(GetCurrentThread(), THREAD_MODE_BACKGROUND_BEGIN)){
 			printf("Error setting thread to background mode: %d\n", GetLastError());
 			return -1;
@@ -197,7 +197,7 @@ int main(int argc, char *argv[]){
 		//Sleep(500);																// Give the listener time to start
 		rebuild_send_TCP(l, tag_tcp, port);
 		//printf("DEBUGGING: Sent packet testing port %d\n", port);
-		Sleep(500);															// The amount of time we will give to the function listening for answers
+		Sleep(1000);															// The amount of time we will give to the function listening for answers
 		SetThreadPriority(GetCurrentThread(), THREAD_MODE_BACKGROUND_END);
 	}
 
